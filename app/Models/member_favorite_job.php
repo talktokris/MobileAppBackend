@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class member_favorite_job extends Model
 {
     use HasFactory;
+
+
+protected $fillable = [
+
+    'member_id',
+    'job_ads_id',
+    'status',
+
+];
 }

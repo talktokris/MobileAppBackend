@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class member_experiences_data extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'member_id',
+        'post',
+        'company',
+        'country',
+        'startDate',
+        'endDate',
+        'status'
+    ];
 }

@@ -7,5 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class country_list extends Model
 {
+
     use HasFactory;
+    protected $fillable = [
+        'title',
+        'capital',
+        'codeCurrency',
+        'codeFips',
+        'codeIso2Country',
+        'codeIso3Country',
+        'continent',
+        'nameCurrency',
+        'numericIso',
+        'phonePrefix',
+        'status'
+    ];
 }
