@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class skill_level_list extends Model
+class Skill_level_list extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',
         'status'

@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class job_ads_list extends Model
+class Job_ads_list extends Model
 {
     use HasFactory;
-
 
     protected $fillable = [
         'title',
@@ -26,4 +25,18 @@ class job_ads_list extends Model
         'status',
 
     ];
+
+    public function getJobDescription(){
+
+        return $this->hasMany(Job_ads_job_description::class, 'job_ads_id', 'id');
+
+    }
+
+    public function getJobSpecification(){
+
+        return $this->hasMany(Job_ads_job_specification::class, 'job_ads_id', 'id');
+
+    }
+
+
 }

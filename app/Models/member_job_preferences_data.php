@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class member_job_preferences_data extends Model
+class Member_job_preferences_data extends Model
 {
     use HasFactory;
 
@@ -18,4 +18,10 @@ class member_job_preferences_data extends Model
         'type',
         'status'
     ];
+
+    public function getMemberInfo(){
+
+        return $this->belongsTo(Member::class, 'id', 'member_id');
+
+    }
 }

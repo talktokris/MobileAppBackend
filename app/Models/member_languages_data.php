@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class member_languages_data extends Model
+class Member_languages_data extends Model
 {
     use HasFactory;
 
@@ -15,4 +15,10 @@ class member_languages_data extends Model
         'language_level',
         'status'
     ];
+
+    public function getMemberInfo(){
+
+        return $this->belongsTo(Member::class, 'id', 'member_id');
+
+    }
 }

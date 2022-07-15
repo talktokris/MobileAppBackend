@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class member_favorite_job extends Model
+class Member_favorite_job extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
 
-protected $fillable = [
-
-    'member_id',
-    'job_ads_id',
-    'status',
-
-];
+        'member_id',
+        'job_ads_id',
+        'status',
+    ];
 }

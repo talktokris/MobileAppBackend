@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class member_educations_data extends Model
+class Member_educations_data extends Model
 {
     use HasFactory;
 
@@ -19,4 +19,10 @@ class member_educations_data extends Model
         'endDate',
         'status'
     ];
+
+    public function getMemberInfo(){
+
+        return $this->belongsTo(Member::class, 'id', 'member_id');
+
+    }
 }
