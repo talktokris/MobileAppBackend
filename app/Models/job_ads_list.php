@@ -38,5 +38,18 @@ class Job_ads_list extends Model
 
     }
 
+    public function getFavList(){
+
+        return $this->hasMany(Member_favorite_job::class, 'job_ads_id', 'id');
+
+    }
+
+
+    public function getFavInfo(){
+
+        return $this->belongsTo(Member_favorite_job::class, 'id', 'job_ads_id');
+
+    }
+
 
 }

@@ -69,4 +69,14 @@ class Member extends Model
         return $this->hasMany(Member_tranings_data::class, 'member_id', 'id');
 
     }
+    public function getUser(){
+
+        return $this->belongsTo(Member::class, 'id', 'member_id');
+
+    }
+    public function getFavFind(){
+
+        return $this->hasMany(Member_favorite_job::class, 'member_id', 'id');
+
+    }
 }

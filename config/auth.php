@@ -12,12 +12,23 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
+///*  this was by defaults Kris has commeted it.
 
+
+
+    'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
+    ],
+
+
+/*
+// This was used add by kris for api
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-
+*/
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -35,11 +46,31 @@ return [
     |
     */
 
+    /*
+
+        'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+
+
+
+    */
+
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+           // 'hash'=>false,
+        ],
+
+
     ],
 
     /*

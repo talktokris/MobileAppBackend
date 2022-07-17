@@ -19,7 +19,7 @@ class Member_job_preferences_data extends Model
         'status'
     ];
 
-    public function getMemberInfo(){
+    public function getJobsInfo(){
 
         return $this->belongsTo(Member::class, 'id', 'member_id');
 
