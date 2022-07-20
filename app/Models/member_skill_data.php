@@ -10,7 +10,7 @@ class Member_skill_data extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id',
+        'user_id',
         'skillName',
         'skill_level',
         'status'
@@ -18,7 +18,7 @@ class Member_skill_data extends Model
 
     public function getMemberInfo(){
 
-        return $this->belongsTo(Member::class, 'id', 'member_id');
+        return $this->belongsTo(Member::class, 'id', 'user_id');
 
     }
 }

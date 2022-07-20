@@ -10,7 +10,7 @@ class Member_tranings_data extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id',
+        'user_id',
         'name',
         'org',
         'country',
@@ -22,7 +22,7 @@ class Member_tranings_data extends Model
 
     public function getMemberInfo(){
 
-        return $this->belongsTo(Member::class, 'id', 'member_id');
+        return $this->belongsTo(Member::class, 'id', 'user_id');
 
     }
 }

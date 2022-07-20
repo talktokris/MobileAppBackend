@@ -14,6 +14,14 @@ use App\Models\Member;
 
 class AuthController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['register','login']]);
+    }
+
+
     // Create use data
  public function register(Request $request){
 

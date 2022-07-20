@@ -101,8 +101,9 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
-
+    'ttl' => env('JWT_TTL', 60*24*180),
+   // 'ttl' => env('JWT_TTL', 60),
+   // Auth::attempt($credentials, ['exp' => Carbon\Carbon::now()->addDays(7)->timestamp]); Krishna Add
     /*
     |--------------------------------------------------------------------------
     | Refresh time to live

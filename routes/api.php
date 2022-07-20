@@ -1,11 +1,85 @@
 <?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\api\SettingDataController;
 use App\Http\Controllers\api\JobsController;
 use App\Http\Controllers\api\ResumeController;
 use App\Http\Controllers\api\AuthController;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\api\EducationController;
+use App\Http\Controllers\api\ExperienceController;
+use App\Http\Controllers\api\FavoriteJobsController;
+
+use App\Http\Controllers\api\JobPreferenceController;
+use App\Http\Controllers\api\TraningController;
+use App\Http\Controllers\api\SkillController;
+use App\Http\Controllers\api\LanguageController;
+
+
+/*
+Route::group(['middleware' => 'api',], function ($router) {
+
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout',  [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::post('/profile', [AuthController::class, 'profile']);
+    Route::post('/register', [AuthController::class, 'register']);
+
+});
+*/
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+
+});
+
+Route::controller(EducationController::class)->group(function () {
+    Route::post('education/create', 'store');
+    Route::post('education/update/{id}', 'update');
+    Route::delete('education/delete/{id}', 'destroy');
+});
+
+Route::controller(ExperienceController::class)->group(function () {
+    Route::post('experience/create', 'store');
+    Route::post('experience/update/{id}', 'update');
+    Route::delete('experience/delete/{id}', 'destroy');
+});
+
+Route::controller(FavoriteJobsController::class)->group(function () {
+    Route::post('favorite-jobs/create', 'store');
+    Route::post('favorite-jobs/update/{id}', 'update');
+    Route::delete('favorite-jobs/delete/{id}', 'destroy');
+});
+
+Route::controller(JobPreferenceController::class)->group(function () {
+    Route::post('job-preference/create', 'store');
+    Route::post('job-preference/update/{id}', 'update');
+    Route::delete('job-preference/delete/{id}', 'destroy');
+});
+
+Route::controller(TraningController::class)->group(function () {
+    Route::post('training/create', 'store');
+    Route::post('training/update/{id}', 'update');
+    Route::delete('training/delete/{id}', 'destroy');
+});
+
+
+Route::controller(SkillController::class)->group(function () {
+    Route::post('skill/create', 'store');
+    Route::post('skill/update/{id}', 'update');
+    Route::delete('skill/delete/{id}', 'destroy');
+});
+
+Route::controller(LanguageController::class)->group(function () {
+    Route::post('language/create', 'store');
+    Route::post('language/update/{id}', 'update');
+    Route::delete('language/delete/{id}', 'destroy');
+});
 
 
 
@@ -23,25 +97,8 @@ use Illuminate\Support\Facades\Route;
 //Route::post('/register', [AuthController::class, 'me']);
 
 
-Route::group(['middleware' => 'api',], function ($router) {
 
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout',  [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/profile', [AuthController::class, 'profile']);
-    Route::post('/register', [AuthController::class, 'register']);
-
-});
 //*/
-/*
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-
-});
-*/
 
 
 //Public Routes start
@@ -63,7 +120,9 @@ Route::get('/jobs/search/{word}', [JobsController::class, 'activeJobSearch']);
 Route::get('/jobs/fav/{user_id}', [JobsController::class, 'activeJobFav']);
 
 
-Route::get('/users', [ResumeController::class, 'activeResume']);
+Route::post('/resume', [ResumeController::class, 'activeResumePost']);
+
+Route::get('/resume/{id}', [ResumeController::class, 'activeResumeGet']);
 
 
 

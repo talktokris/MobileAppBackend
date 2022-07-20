@@ -10,7 +10,7 @@ class Member_experiences_data extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id',
+        'user_id',
         'post',
         'company',
         'country',
@@ -21,7 +21,7 @@ class Member_experiences_data extends Model
 
     public function getMemberInfo(){
 
-        return $this->belongsTo(Member::class, 'id', 'member_id');
+        return $this->belongsTo(Member::class, 'id', 'user_id');
 
     }
 }

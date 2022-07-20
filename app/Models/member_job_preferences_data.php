@@ -10,7 +10,7 @@ class Member_job_preferences_data extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id',
+        'user_id',
         'industry',
         'function',
         'country',
@@ -21,7 +21,7 @@ class Member_job_preferences_data extends Model
 
     public function getJobsInfo(){
 
-        return $this->belongsTo(Member::class, 'id', 'member_id');
+        return $this->belongsTo(Member::class, 'id', 'user_id');
 
     }
 }
