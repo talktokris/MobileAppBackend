@@ -28,8 +28,8 @@ class EducationController extends Controller
             'school' => 'required|string|max:150',
             'country' => 'required|string|max:150',
             'subject' => 'required|string|max:150',
-            'startDate' => 'required|string|max:15',
-            'endDate' => 'required|string|max:15',
+            'startDate' => 'required|string|max:25',
+            'endDate' => 'required|string|max:25',
         ]);
 
         if ($validator->fails()) {
@@ -64,8 +64,8 @@ class EducationController extends Controller
             'school' => 'required|string|max:150',
             'country' => 'required|string|max:150',
             'subject' => 'required|string|max:150',
-            'startDate' => 'required|string|max:15',
-            'endDate' => 'required|string|max:15',
+            'startDate' => 'required|string|max:25',
+            'endDate' => 'required|string|max:25',
         ]);
 
         if ($validator->fails()) {

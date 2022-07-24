@@ -13,6 +13,7 @@ class Job_ads_list extends Model
         'title',
         'subTitle',
         'vacancies',
+        'currency',
         'salleryMin',
         'salleryMax',
         'jobCategory',
@@ -48,6 +49,18 @@ class Job_ads_list extends Model
     public function getFavInfo(){
 
         return $this->hasMany(Member_favorite_job::class, 'job_ads_id', 'id');
+
+    }
+
+    public function getJobApplyUsers(){
+
+        return $this->hasMany(Job_apply_list::class, 'job_ads_id', 'id');
+
+    }
+
+    public function appliedMember(){
+
+        return $this->hasMany(Job_apply_list::class, 'job_ads_id', 'id');
 
     }
 

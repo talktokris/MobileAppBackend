@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Member_job_preferences_data extends Model
+class Push_message_list extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'industry',
-        'function',
-        'country',
-        'city',
-        'type',
-        'status'
+        'device_id',
+        'title',
+        'message',
+        'send_status',
+        'read_status',
+        'status',
+
     ];
 
-    public function getJobsInfo(){
+    public function geMessageIdInfo(){
 
         return $this->belongsTo(User::class, 'id', 'user_id');
 

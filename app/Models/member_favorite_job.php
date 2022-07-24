@@ -18,23 +18,26 @@ class Member_favorite_job extends Model
 
     public function getMemberInfo(){
 
-        return $this->belongsTo(Member::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
 
     }
 
     public function getFavList(){
 
-        return $this->belongsTo(Job_ads_list::class, 'id', 'job_ads_id');
+        return $this->belongsTo(Job_ads_list::class, 'job_ads_id', 'id');
 
     }
-/*
 
 
-    public function getFavList(){
+    public function getFavLists(){
 
-        return $this->hasMany(Job_ads_list::class, 'id', 'job_ads_id');
+        return $this->hasMany(User::class, 'id', 'user_id');
 
     }
+
+
+
+
 
     public function getFavJobDescription(){
 
@@ -47,5 +50,5 @@ class Member_favorite_job extends Model
         return $this->hasMany(Job_ads_job_specification::class, 'job_ads_id', 'job_ads_id');
 
     }
-    */
+
 }

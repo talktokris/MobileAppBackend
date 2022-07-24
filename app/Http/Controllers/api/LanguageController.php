@@ -65,7 +65,7 @@ class LanguageController extends Controller
         $todo = Member_languages_data::find($id);
         $todo->user_id = $request->user_id;
         $todo->language_name = $request->language_name;
-        $todo->language_level = $request->language_name;
+        $todo->language_level = $request->language_level;
 
         $todo->save();
 

@@ -23,13 +23,13 @@ class JobsController extends Controller
 
     public function activeJobList(){
 
-        return Job_ads_list::where('status','=',1)->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->get();
+        return Job_ads_list::where('status','=',1)->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->with('getJobApplyUsers')->get();
     }
 
     public function activeJobSingle($id=null){
       //  return $id;
 
-        return Job_ads_list::where([['status','=',1],['id','=',$id]])->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->get();
+        return Job_ads_list::where([['status','=',1],['id','=',$id]])->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->with('getJobApplyUsers')->get();
     }
 
     public function activeJobSearch($word=null){
@@ -38,14 +38,14 @@ class JobsController extends Controller
       // $word= $request->word;
 
 
-          return Job_ads_list::where([['status','=',1],['title','Like','%'.$word.'%']])->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->get();
+          return Job_ads_list::where([['status','=',1],['title','Like','%'.$word.'%']])->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->with('getJobApplyUsers')->get();
         //  return Job_ads_list::where([['status','=',1],['id','=',$id]])->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->get();
 
     }
 
       public function activeJobFav(Request $request, $user_id=null){
 
-          return Member_favorite_job::where([['status','=',1],['user_id','=',$user_id]])->with('getFavList')->with('getJobDescription')->with('getJobSpecification')->with('getFavInfo')->get();
+          return Member_favorite_job::where([['status','=',1],['user_id','=',$user_id]])->with('getFavList')->with('getFavJobDescription')->with('getFavJobSpecification')->with('getFavLists')->get();
       }
 
 

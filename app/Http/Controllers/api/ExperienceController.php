@@ -24,8 +24,8 @@ class ExperienceController extends Controller
             'post' => 'required|string|max:150',
             'company' => 'required|string|max:150',
             'country' => 'required|string|max:150',
-            'startDate' => 'required|string|max:15',
-            'endDate' => 'required|string|max:15',
+            'startDate' => 'required|string|max:25',
+            'endDate' => 'required|string|max:25',
         ]);
 
         if ($validator->fails()) {
@@ -57,8 +57,8 @@ class ExperienceController extends Controller
             'post' => 'required|string|max:150',
             'company' => 'required|string|max:150',
             'country' => 'required|string|max:150',
-            'startDate' => 'required|string|max:15',
-            'endDate' => 'required|string|max:15',
+            'startDate' => 'required|string|max:25',
+            'endDate' => 'required|string|max:25',
         ]);
 
         if ($validator->fails()) {
@@ -67,6 +67,7 @@ class ExperienceController extends Controller
 
         $todo = Member_experiences_data::find($id);
         $todo->user_id = $request->user_id;
+        $todo->post = $request->post;
         $todo->company = $request->company;
         $todo->country = $request->country;
         $todo->startDate = $request->startDate;

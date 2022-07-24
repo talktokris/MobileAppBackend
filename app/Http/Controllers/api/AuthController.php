@@ -4,11 +4,11 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Member;
 
@@ -29,27 +29,33 @@ class AuthController extends Controller
 
 
 
-    $validatedData = Validator::make($request->all(),[
+   $data = $request->only('name', 'email', 'password','password_confirmation');
+   $validator = Validator::make($data, [
         'name' => 'required|string|min:3|max:100',
         'email' => 'required|string|email|max:100|unique:users',
-        'password' => 'required|string|min:3|max:100',
+        'password' => 'required| min:6| max:25 |confirmed',
+        'password_confirmation' => 'required| min:6',
+
 
 
         ]);
 
-        if($validatedData->fails()){
-            return response()->json($validatedData->errors(), 400);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
         }
 
        $user= User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
+            'status'=>1,
+            'role'=>1,
         ]);
 
         return response()->json([
-            'message'=>'User registered Successfully',
-            'users'=>$user,
+            'status' => 'success',
+            'message' => 'User registered Successfully',
+            'todo' => $user,
         ]);
 
 
@@ -87,14 +93,14 @@ class AuthController extends Controller
     return response()->json([
         'access_token'=>$token,
         'token_type'=>'bearer',
-        'expires_in'=>auth()->factory()->getTTL()*60
+        'expires_in'=>auth()->factory()->getTTL()*60*24*180
 
     ]);
 
 }
 
 // Profile to fatch all the user data
-public function profile(){
+public function profile(Request $request){
 
     return response()->json(auth()->user());
  }

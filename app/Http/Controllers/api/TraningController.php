@@ -28,8 +28,8 @@ class TraningController extends Controller
             'name' => 'required|string|max:150',
             'org' => 'required|string|max:150',
             'country' => 'required|string|max:150',
-            'startDate' => 'required|string|max:15',
-            'endDate' => 'required|string|max:15',
+            //'startDate' => 'string|max:15',
+            //'endDate' => 'string|max:15',
         ]);
 
         if ($validator->fails()) {
@@ -61,8 +61,8 @@ class TraningController extends Controller
             'name' => 'required|string|max:150',
             'org' => 'required|string|max:150',
             'country' => 'required|string|max:150',
-            'startDate' => 'required|string|max:15',
-            'endDate' => 'required|string|max:15',
+           // 'startDate' => 'string|max:15',
+           // 'endDate' => 'string|max:15',
         ]);
 
         if ($validator->fails()) {

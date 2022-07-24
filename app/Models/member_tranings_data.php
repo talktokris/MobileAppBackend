@@ -22,7 +22,7 @@ class Member_tranings_data extends Model
 
     public function getMemberInfo(){
 
-        return $this->belongsTo(Member::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'id', 'user_id');
 
     }
 }

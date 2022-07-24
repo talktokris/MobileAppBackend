@@ -18,6 +18,9 @@ use App\Http\Controllers\api\TraningController;
 use App\Http\Controllers\api\SkillController;
 use App\Http\Controllers\api\LanguageController;
 
+use App\Http\Controllers\api\JobApplyController;
+use App\Http\Controllers\api\PushMessageController;
+
 
 /*
 Route::group(['middleware' => 'api',], function ($router) {
@@ -35,6 +38,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
+    Route::post('profile', 'profile');
 
 });
 
@@ -123,6 +127,12 @@ Route::get('/jobs/fav/{user_id}', [JobsController::class, 'activeJobFav']);
 Route::post('/resume', [ResumeController::class, 'activeResumePost']);
 
 Route::get('/resume/{id}', [ResumeController::class, 'activeResumeGet']);
+Route::post('/basic/update/{id}', [ResumeController::class, 'basicUpdate']);
+Route::post('/personal/update/{id}', [ResumeController::class, 'personalUpdate']);
+
+Route::get('/jobs/applied/{id}', [JobApplyController::class, 'index']);
+Route::post('/jobs/apply', [JobApplyController::class, 'store']);
+Route::get('/push/message/{id}', [PushMessageController::class, 'index']);
 
 
 

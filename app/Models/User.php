@@ -32,6 +32,7 @@ class User extends Authenticatable implements JWTSubject
         'lastName',
         'name',
         'email',
+        'device_id',
         'emailStatus',
         'email_verified_at',
         'password',
@@ -40,6 +41,8 @@ class User extends Authenticatable implements JWTSubject
         'dob',
         'height',
         'weight',
+        'religion',
+        'maritalStatus',
         'nationality',
         'mobileNo',
         'mobileStatus',
@@ -148,6 +151,18 @@ class User extends Authenticatable implements JWTSubject
     public function getFavFind(){
 
         return $this->hasMany(Member_favorite_job::class, 'user_id', 'id');
+
+    }
+
+    public function getJobsApply(){
+
+        return $this->hasMany(Job_apply_list::class, 'user_id', 'id');
+
+    }
+
+    public function getPushMessages(){
+
+        return $this->hasMany(Push_message_list::class, 'user_id', 'id');
 
     }
 
