@@ -81,6 +81,15 @@ class AuthController extends Controller
         {
             return response()->json(['error'=>'Unauthorized']);
         }
+
+
+
+       // return $request->email;
+
+
+
+        $newsEditSave = User::where("email", $request->email)->update(["remember_token" => $token]);
+
         return $this->respondWithToken($token);
 
  }
