@@ -14,6 +14,7 @@ use App\Models\Member_job_preferences_data;
 use App\Models\Member_languages_data;
 use App\Models\Member_skill_data;
 use App\Models\Member_tranings_data;
+use Intervention\Image\Facades\Image;
 //use Validator;
 
 class ResumeController extends Controller
@@ -25,6 +26,89 @@ class ResumeController extends Controller
         $this->middleware('auth:api', ['except' => ['activeResumeGet']]);
     }
 
+
+    public function imageUpload(Request $request, $id=null){
+
+      /*  return response()->json([
+            'status' => 'error',
+            'message' => $request->all(),
+        ]);
+
+*/
+        $savingPath='assets/images/members';
+
+        if ('POST' === $request->getMethod()){
+
+
+            if(!$request->hasFile('image_name')) {
+                return response()->json(['upload_file_not_found'], 400);
+            }
+
+
+
+            $data = $request->only('id','image_name');
+            $validator = Validator::make($data, [
+            'id' => 'required|integer|min:1|max:20',
+            'image_name'=>'required|mimes:png,jpg,jpeg|max:8048',
+
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->messages()], 200);
+            }
+
+            $data = $request->all();
+
+            $imageName = $data['image_name'];
+
+           // $get_id = $next_ID;
+            $maxOriginalNameSize=20;
+            $ImageNameOrg=$imageName->getClientOriginalName();
+            if(strlen($ImageNameOrg) > $maxOriginalNameSize){ $ImageNewNameSet=substr($ImageNameOrg, 0, $maxOriginalNameSize);
+                $ImageNewName= $ImageNewNameSet.'.'.$imageName->getClientOriginalExtension();
+             }
+            else { $ImageNewName = $ImageNameOrg;}// shorting the image name;
+
+            $getImageName= date('Y-m-d-His').'-'.$ImageNewName;
+
+            /* Saving the images Start */
+
+            $thumbImgName='thumb-'.$getImageName;
+            $largeImgName='large-'.$getImageName;
+
+            $get_id = $id;
+
+            $newPath= $savingPath.'/'.$get_id;
+
+          if (!file_exists($newPath)) {  mkdir($newPath, 0777, true);  }
+
+            $img = Image::make($imageName)->fit(400, 400, function ($constraint) {
+                    $constraint->upsize();
+            });
+
+            $img->save($newPath.'/'.$thumbImgName, 60);
+
+            $imageSave = User::where("id", $get_id)->update(["image" => $thumbImgName]);
+
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Image upload successfully',
+                'todo' => $imageSave,
+            ]);
+
+        } else {
+
+               return response()->json([
+                    'status' => 'error',
+                    'message' => 'unauthorized method ',
+                ]);
+
+        }
+
+
+
+    }
 
 
     public function activeResumePost(Request $request){

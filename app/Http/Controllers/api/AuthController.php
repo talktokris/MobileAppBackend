@@ -49,7 +49,7 @@ class AuthController extends Controller
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'status'=>1,
-            'role'=>1,
+            'role'=>0,
         ]);
 
         return response()->json([

@@ -129,7 +129,7 @@ Route::post('/resume', [ResumeController::class, 'activeResumePost']);
 Route::get('/resume/{id}', [ResumeController::class, 'activeResumeGet']);
 Route::post('/basic/update/{id}', [ResumeController::class, 'basicUpdate']);
 Route::post('/personal/update/{id}', [ResumeController::class, 'personalUpdate']);
-
+Route::post('/image/upload/{id}', [ResumeController::class, 'imageUpload']);
 Route::get('/jobs/applied/{id}', [JobApplyController::class, 'index']);
 Route::post('/jobs/apply', [JobApplyController::class, 'store']);
 Route::get('/push/message/{id}', [PushMessageController::class, 'index']);
