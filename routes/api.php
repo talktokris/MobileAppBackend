@@ -134,6 +134,9 @@ Route::get('/jobs/applied/{id}', [JobApplyController::class, 'index']);
 Route::post('/jobs/apply', [JobApplyController::class, 'store']);
 Route::get('/push/message/{id}', [PushMessageController::class, 'index']);
 
+Route::post('/push/device/{id}', [PushMessageController::class, 'pushIdUpdate']);
+
+
 
 
 //Public Routes end
