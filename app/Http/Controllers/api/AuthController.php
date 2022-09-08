@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailPasswordReset;
 
 use App\Models\Member;
 
@@ -18,7 +20,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['register','login']]);
+        $this->middleware('auth:api', ['except' => ['register','login','passwordResetCode','passwordResetSave']]);
     }
 
 
@@ -128,5 +130,134 @@ public function profile(Request $request){
     return response()->json(['message'=>'User Successfully logged out']);
 
  }
+
+
+
+ public function passwordResetCode(Request $request){
+
+    $validatedData = Validator::make($request->all(),[
+
+        'email' => 'required|string|email',
+
+
+        ]);
+
+        if($validatedData->fails()){
+           // return response()->json($validatedData->errors(), 400);
+          // return response()->json(['error' => $validator->messages()], 200);
+            return response()->json([
+                'status' => 'error',
+                'message' => $validatedData->messages(),
+            ]);
+        }
+
+
+
+
+            // return $request->email;
+        $checkEmail= User::where('email','=', $request->email)->get()->count();
+
+
+        if($checkEmail==0){
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No account associated with the email address',
+            ]);
+        }
+
+        if($checkEmail==1){
+
+            $newResetCode = substr(strtoupper(md5(rand(100000, 9999999))), 0, 6);
+
+            $passCodeSave = User::where("email", $request->email)->update(["reset_code" => $newResetCode]);
+
+            if($passCodeSave){
+
+                $details = [
+
+                    'title' => 'Password reset confirmation code',
+
+                    'body' => 'This is for testing email using smtp',
+
+                    'resetCode'=> $newResetCode,
+
+                ];
+                Mail::to($request->email)->send(new MailPasswordReset($details));
+             }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Confirmation code has sent to email address',
+               // 'todo' => $passCodeSave,
+            ]);
+
+
+
+        }
+        //eturn response()->json(['check'=>$checkEmail]);
+
+            //  $newsEditSave = User::where("email", $request->email)->update(["remember_token" => $token]);
+
+            //  return $this->respondWithToken($token);
+
+ }
+
+
+ public function passwordResetSave(Request $request){
+
+
+    $validatedData = Validator::make($request->all(),[
+
+        'email' => 'required|string|email',
+        'confirm_code' => 'required|string|min:3|max:100',
+        'password' => 'required| min:6| max:25 |confirmed',
+        'password_confirmation' => 'required| min:6',
+
+        ]);
+
+        if($validatedData->fails()){
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $validatedData->messages(),
+            ]);
+        }
+
+
+
+
+            // return $request->email;
+        $checkEmail= User::where([['email','=', $request->email],['reset_code','=', $request->confirm_code]])->get()->count();
+
+
+        if($checkEmail==0){
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid confirmation code',
+            ]);
+        }
+
+        if($checkEmail==1){
+
+            $passWordHash = Hash::make($request->password);
+
+            $passCodeSave = User::where("email", $request->email)->update(["password" => $passWordHash]);
+
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Your password has been reset successfully, Please login using new password',
+               // 'todo' => $passCodeSave,
+            ]);
+
+
+
+        }
+
+ }
+
+
 
 }

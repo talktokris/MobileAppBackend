@@ -13,6 +13,7 @@ class Push_message_list extends Model
         'user_id',
         'device_id',
         'title',
+        'sub_title',
         'message',
         'send_status',
         'read_status',

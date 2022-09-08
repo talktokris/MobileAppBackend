@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Laravel',
+    'name' => 'JobAgency',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
@@ -236,7 +236,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'laravel_cache',
+    'prefix' => 'jobagency_cache',
   ),
   'cors' => 
   array (
@@ -335,7 +335,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'laravel_database_',
+        'prefix' => 'jobagency_database_',
       ),
       'default' => 
       array (
@@ -526,11 +526,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailhog',
-        'port' => '1025',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'smtp.mailtrap.io',
+        'port' => '2525',
+        'encryption' => 'tls',
+        'username' => '75a70f5dbbbdca',
+        'password' => '2d7eee2fc9242f',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -572,8 +572,8 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
-      'name' => 'Laravel',
+      'address' => 'support@stjobagency.com',
+      'name' => 'JobAgency',
     ),
     'markdown' => 
     array (
@@ -694,7 +694,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'laravel_session',
+    'cookie' => 'jobagency_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,

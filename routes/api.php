@@ -39,6 +39,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
     Route::post('profile', 'profile');
+    Route::post('password/code', 'passwordResetCode');
+    Route::post('password/save', 'passwordResetSave');
 
 });
 
